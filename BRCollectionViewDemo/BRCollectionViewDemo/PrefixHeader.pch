@@ -1,0 +1,32 @@
+//
+//  PrefixHeader.pch
+//  BRCollectionViewDemo
+//
+//  Created by 任波 on 2017/8/17.
+//  Copyright © 2017年 renb. All rights reserved.
+//
+
+#ifndef PrefixHeader_pch
+#define PrefixHeader_pch
+
+// Include any system framework and library headers here that should be included in all compilation units.
+// You will also need to set the Prefix Header build setting of one or more of your targets to reference this file.
+
+/// 屏幕大小、宽、高
+#define SCREEN_BOUNDS [UIScreen mainScreen].bounds
+#define SCREEN_WIDTH [UIScreen mainScreen].bounds.size.width
+#define SCREEN_HEIGHT [UIScreen mainScreen].bounds.size.height
+
+// 等比例适配系数
+#define kScaleFit (SCREEN_WIDTH / 375.0f)
+
+/// RGB颜色(10进制)
+#define RGB(r, g, b, a) [UIColor colorWithRed:(r) / 255.0 green:(g) / 255.0 blue:(b) / 255.0 alpha:(a)]
+
+/// RGB颜色(16进制)
+#define RGB_HEX(rgbValue, a) \
+[UIColor colorWithRed:((CGFloat)((rgbValue & 0xFF0000) >> 16)) / 255.0 \
+green:((CGFloat)((rgbValue & 0xFF00) >> 8)) / 255.0 \
+blue:((CGFloat)(rgbValue & 0xFF)) / 255.0 alpha:(a)]
+
+#endif /* PrefixHeader_pch */

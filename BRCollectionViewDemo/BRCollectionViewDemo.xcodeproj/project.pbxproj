@@ -13,6 +13,8 @@
 		C5ACE55D1F452C4D0069978B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C5ACE55B1F452C4D0069978B /* Main.storyboard */; };
 		C5ACE55F1F452C4D0069978B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C5ACE55E1F452C4D0069978B /* Assets.xcassets */; };
 		C5ACE5621F452C4D0069978B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C5ACE5601F452C4D0069978B /* LaunchScreen.storyboard */; };
+		C5ACE56E1F452C9F0069978B /* BRCircleLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = C5ACE56B1F452C9F0069978B /* BRCircleLayout.m */; };
+		C5ACE56F1F452C9F0069978B /* BRCirclePickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = C5ACE56D1F452C9F0069978B /* BRCirclePickerView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +28,11 @@
 		C5ACE55E1F452C4D0069978B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		C5ACE5611F452C4D0069978B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		C5ACE5631F452C4D0069978B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		C5ACE56A1F452C9F0069978B /* BRCircleLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BRCircleLayout.h; sourceTree = "<group>"; };
+		C5ACE56B1F452C9F0069978B /* BRCircleLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BRCircleLayout.m; sourceTree = "<group>"; };
+		C5ACE56C1F452C9F0069978B /* BRCirclePickerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BRCirclePickerView.h; sourceTree = "<group>"; };
+		C5ACE56D1F452C9F0069978B /* BRCirclePickerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BRCirclePickerView.m; sourceTree = "<group>"; };
+		C5ACE5701F452CCE0069978B /* PrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,6 +65,7 @@
 		C5ACE5511F452C4D0069978B /* BRCollectionViewDemo */ = {
 			isa = PBXGroup;
 			children = (
+				C5ACE5691F452C9F0069978B /* BRCirclePickerView */,
 				C5ACE5551F452C4D0069978B /* AppDelegate.h */,
 				C5ACE5561F452C4D0069978B /* AppDelegate.m */,
 				C5ACE5581F452C4D0069978B /* ViewController.h */,
@@ -74,9 +82,21 @@
 		C5ACE5521F452C4D0069978B /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				C5ACE5701F452CCE0069978B /* PrefixHeader.pch */,
 				C5ACE5531F452C4D0069978B /* main.m */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		C5ACE5691F452C9F0069978B /* BRCirclePickerView */ = {
+			isa = PBXGroup;
+			children = (
+				C5ACE56A1F452C9F0069978B /* BRCircleLayout.h */,
+				C5ACE56B1F452C9F0069978B /* BRCircleLayout.m */,
+				C5ACE56C1F452C9F0069978B /* BRCirclePickerView.h */,
+				C5ACE56D1F452C9F0069978B /* BRCirclePickerView.m */,
+			);
+			path = BRCirclePickerView;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -150,9 +170,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C5ACE56F1F452C9F0069978B /* BRCirclePickerView.m in Sources */,
 				C5ACE55A1F452C4D0069978B /* ViewController.m in Sources */,
 				C5ACE5571F452C4D0069978B /* AppDelegate.m in Sources */,
 				C5ACE5541F452C4D0069978B /* main.m in Sources */,
+				C5ACE56E1F452C9F0069978B /* BRCircleLayout.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -272,6 +294,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				GCC_PREFIX_HEADER = "$(PRODUCT_NAME)/PrefixHeader.pch";
 				INFOPLIST_FILE = BRCollectionViewDemo/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.renb.BRCollectionViewDemo;
@@ -283,6 +306,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				GCC_PREFIX_HEADER = "$(PRODUCT_NAME)/PrefixHeader.pch";
 				INFOPLIST_FILE = BRCollectionViewDemo/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.renb.BRCollectionViewDemo;
