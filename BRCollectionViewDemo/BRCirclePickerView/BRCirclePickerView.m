@@ -8,9 +8,8 @@
 
 #import "BRCirclePickerView.h"
 #import "BRCircleLayout.h"
-#import "CoreTextArcView.h"
-#import "NSDate+BRAdd.h"
-#import "NSString+BRAdd.h"
+//#import "NSDate+BRAdd.h"
+//#import "NSString+BRAdd.h"
 
 /** 圆盘弧形文本个数 */
 #define itemCount 6
@@ -36,8 +35,7 @@
 @property (nonatomic, strong) UIImageView *centerImageView;
 /** 圆盘中心Label */
 @property (nonatomic, strong) UILabel *centerLabel;
-/** 圆形滚动条 */
-@property (nonatomic, strong) CircleProgressView *progressView;
+
 /** 日期 */
 @property (nonatomic, strong) UILabel *dateLabel;
 
@@ -60,11 +58,6 @@
     self.rotateImageView.hidden = NO;
     self.collectionView.hidden = NO;
     self.centerImageView.hidden = NO;
-    if (_identityFlag == 1) {
-        self.progressView.hidden = NO;
-    } else {
-        self.progressView.hidden = YES;
-    }
     self.dateLabel.hidden = NO;
 }
 
@@ -79,21 +72,12 @@
     
     // 默认滚动
     [self scrollToItemAtIndex:self.currentSelIndex animated:YES];
-    
-    if (_identityFlag == 1) {
-        // 重新转动
-        [self.progressView setProgress:0.0];
-        [self.progressView setProgress:self.currentProbability];
-    }
 }
 
 - (void)reloadDataForSrcollEnd {
     if (_identityFlag == 1) {
         // 刷新centerLabel的数据
         self.centerLabel.attributedText = self.centerText;
-        // 重新转动
-        [self.progressView setProgress:0.0];
-        [self.progressView setProgress:self.currentProbability];
     }
 }
 
@@ -139,22 +123,20 @@
 
 - (UIImageView *)centerImageView {
     if (!_centerImageView) {
-        _centerImageView = [[UIImageView alloc]init];
+        _centerImageView = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, 162 * kScaleFit, 162 * kScaleFit)];
+        _centerImageView.center = self.collectionView.center;
         _centerImageView.backgroundColor = [UIColor clearColor];
         NSString *imageName = [NSString stringWithFormat:@"home%ld_disc_center", _identityFlag];
         _centerImageView.image = [UIImage imageNamed:imageName];
         [self addSubview:_centerImageView];
-        [_centerImageView mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.center.mas_equalTo(self.collectionView);
-            make.size.mas_equalTo(CGSizeMake(162 * kScaleFit, 162 * kScaleFit));
-        }];
     }
     return _centerImageView;
 }
 
 - (UILabel *)centerLabel {
     if (!_centerLabel) {
-        _centerLabel = [[UILabel alloc]init];
+        _centerLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, 80 * kScaleFit, 80 * kScaleFit)];
+        _centerLabel.center = self.center;
         _centerLabel.backgroundColor = [UIColor clearColor];
         _centerLabel.textAlignment = NSTextAlignmentCenter;
         _centerLabel.textColor = [UIColor whiteColor];
@@ -163,10 +145,6 @@
         _centerLabel.layer.cornerRadius = 40.0f * kScaleFit;
         _centerLabel.layer.masksToBounds = YES;
         [self addSubview:_centerLabel];
-        [_centerLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.center.mas_equalTo(self);
-            make.size.mas_equalTo(CGSizeMake(80 * kScaleFit, 80 * kScaleFit));
-        }];
         _centerLabel.attributedText = self.centerText;
         // label 点击事件
         _centerLabel.userInteractionEnabled = YES;
@@ -181,40 +159,16 @@
     self.didTapCenterLabelBlock();
 }
 
-- (CircleProgressView *)progressView {
-    if (!_progressView) {
-        _progressView = [[CircleProgressView alloc] initWithFrame:CGRectMake(0, 0, 125 * kScaleFit, 125 * kScaleFit)];
-        _progressView.center = self.collectionView.center;
-        _progressView.bottomWidth = 2.5 * kScaleFit;
-        _progressView.progressWidth = 2 * kScaleFit;
-        NSArray *colorArr = @[RGB_HEX(0xB280E7, 1.0), RGB_HEX(0xFF7998, 1.0), RGB_HEX(0x40B3ED, 1.0)];
-        _progressView.fillColor = [colorArr objectAtIndex:(_identityFlag - 1)];
-        _progressView.bgColor = [[UIColor whiteColor]colorWithAlphaComponent:0.2];
-        _progressView.dotDiameter = 20 * kScaleFit;
-        _progressView.edgespace = 5 * kScaleFit;
-        _progressView.dotImage = [UIImage imageNamed:@"brightDot"];
-        [_progressView drawProgress];
-        // 默认转动多少
-        [_progressView setProgress:self.currentProbability];
-        [self addSubview:_progressView];
-    }
-    return _progressView;
-}
-
 - (UILabel *)dateLabel {
     if (!_dateLabel) {
-        _dateLabel = [[UILabel alloc]init];
+        _dateLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, 100 * kScaleFit, 20 * kScaleFit)];
+        _dateLabel.center = CGPointMake(self.center.x, self.center.y + 100 * kScaleFit);
         _dateLabel.backgroundColor = [UIColor clearColor];
         _dateLabel.font = [UIFont systemFontOfSize:14.0f * kScaleFit];
         _dateLabel.textColor = [UIColor whiteColor];
         _dateLabel.textAlignment = NSTextAlignmentCenter;
         _dateLabel.text = self.nowDateString;
         [self addSubview:_dateLabel];
-        [_dateLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.centerX.mas_equalTo(self.mas_centerX);
-            make.centerY.mas_equalTo(self.mas_centerY).with.offset(100 * kScaleFit);
-            make.size.mas_equalTo(CGSizeMake(100 * kScaleFit, 20 * kScaleFit));
-        }];
     }
     return _dateLabel;
 }
@@ -236,8 +190,12 @@
     }
     
     if (self.circleTextArr.count > 0) {
-        CoreTextArcView *arcTextLabel = [[CoreTextArcView alloc] initWithFrame:CGRectMake(0, 0, 100 * kScaleFit, 100 * kScaleFit) font:[UIFont systemFontOfSize:14.0f * kScaleFit] text:self.circleTextArr[indexPath.item] radius:-80 * kScaleFit arcSize:-70 * kScaleFit color:[UIColor whiteColor]]; // -80, -70
+        UILabel *arcTextLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, 100 * kScaleFit, 100 * kScaleFit)];
         arcTextLabel.backgroundColor = [UIColor clearColor];
+        arcTextLabel.font = [UIFont systemFontOfSize:14.0f * kScaleFit];
+        arcTextLabel.textColor = [UIColor whiteColor];
+        arcTextLabel.textAlignment = NSTextAlignmentCenter;
+        arcTextLabel.text = self.circleTextArr[indexPath.item];
         [cell.contentView addSubview:arcTextLabel];
     }
     

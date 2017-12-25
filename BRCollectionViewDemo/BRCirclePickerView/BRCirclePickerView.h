@@ -7,7 +7,6 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "CircleProgressView.h"
 
 typedef void(^BRDidTapBlock)();
 typedef void(^BRDidScrollEndBlock)(NSString *currentValue);
