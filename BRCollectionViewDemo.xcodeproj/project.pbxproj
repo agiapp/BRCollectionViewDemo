@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		C59E14C41FF29B2700EC7B7D /* NSData+BRAdd.m in Sources */ = {isa = PBXBuildFile; fileRef = C59E14C21FF29B2700EC7B7D /* NSData+BRAdd.m */; };
 		C5ACE5541F452C4D0069978B /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = C5ACE5531F452C4D0069978B /* main.m */; };
 		C5ACE5571F452C4D0069978B /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = C5ACE5561F452C4D0069978B /* AppDelegate.m */; };
 		C5ACE55A1F452C4D0069978B /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C5ACE5591F452C4D0069978B /* ViewController.m */; };
@@ -18,6 +19,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		C59E14C21FF29B2700EC7B7D /* NSData+BRAdd.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSData+BRAdd.m"; sourceTree = "<group>"; };
+		C59E14C31FF29B2700EC7B7D /* NSData+BRAdd.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSData+BRAdd.h"; sourceTree = "<group>"; };
 		C5ACE54F1F452C4D0069978B /* BRCollectionViewDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BRCollectionViewDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C5ACE5531F452C4D0069978B /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		C5ACE5551F452C4D0069978B /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -68,6 +71,8 @@
 				C5ACE5691F452C9F0069978B /* BRCirclePickerView */,
 				C5ACE5551F452C4D0069978B /* AppDelegate.h */,
 				C5ACE5561F452C4D0069978B /* AppDelegate.m */,
+				C59E14C31FF29B2700EC7B7D /* NSData+BRAdd.h */,
+				C59E14C21FF29B2700EC7B7D /* NSData+BRAdd.m */,
 				C5ACE5581F452C4D0069978B /* ViewController.h */,
 				C5ACE5591F452C4D0069978B /* ViewController.m */,
 				C5ACE55B1F452C4D0069978B /* Main.storyboard */,
@@ -174,6 +179,7 @@
 				C5ACE55A1F452C4D0069978B /* ViewController.m in Sources */,
 				C5ACE5571F452C4D0069978B /* AppDelegate.m in Sources */,
 				C5ACE5541F452C4D0069978B /* main.m in Sources */,
+				C59E14C41FF29B2700EC7B7D /* NSData+BRAdd.m in Sources */,
 				C5ACE56E1F452C9F0069978B /* BRCircleLayout.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -333,6 +339,7 @@
 				C5ACE5681F452C4D0069978B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

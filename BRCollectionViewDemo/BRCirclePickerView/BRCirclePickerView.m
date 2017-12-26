@@ -8,7 +8,7 @@
 
 #import "BRCirclePickerView.h"
 #import "BRCircleLayout.h"
-//#import "NSDate+BRAdd.h"
+#import "NSDate+BRAdd.h"
 //#import "NSString+BRAdd.h"
 
 /** 圆盘弧形文本个数 */
