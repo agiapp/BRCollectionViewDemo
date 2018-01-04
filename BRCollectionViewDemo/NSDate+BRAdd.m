@@ -6,13 +6,17 @@
 //  Copyright © 2017年 apple. All rights reserved.
 //
 
-#import "NSData+BRAdd.h"
+#import "NSDate+BRAdd.h"
 
-@implementation NSData (BRAdd)
+@implementation NSDate (BRAdd)
+
+// yyyy-MM-dd hh:mm:ss  12小时制
+// yyyy-MM-dd HH:mm:ss  24小时制
+// yyyy-MM-dd HH:mm:ss.SSS  (SSS毫秒)
 
 #pragma mark - 获取系统当前的时间戳，即当前时间距1970的秒数（以毫秒为单位）
 + (NSString *)currentTimestamp {
-    NSDate* date = [NSDate dateWithTimeIntervalSinceNow:0];
+    NSDate *date = [NSDate dateWithTimeIntervalSinceNow:0];
     /** 当前时间距1970的秒数。*1000 是精确到毫秒，不乘就是精确到秒 */
     NSTimeInterval interval = [date timeIntervalSince1970] * 1000;
     NSString *timeString = [NSString stringWithFormat:@"%0.f", interval];
@@ -45,6 +49,35 @@
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
     formatter.dateFormat = @"yyyy-MM-dd HH:mm:ss";
     return [formatter stringFromDate:date];
+}
+
+//计算两个日期之间的天数
++ (NSInteger)deltaDaysFrombeginDate:(NSString *)beginDateString endDate:(NSString *)endDateString {
+    //创建日期格式化对象
+    NSDateFormatter *dateFormatter=[[NSDateFormatter alloc] init];
+    dateFormatter.dateFormat = @"yyyy-MM-dd";
+    NSDate *beginDate = [dateFormatter dateFromString:beginDateString];
+    NSDate *endDate = [dateFormatter dateFromString:endDateString];
+    //取两个日期对象的时间间隔
+    NSTimeInterval deltaTime = [endDate timeIntervalSinceDate:beginDate];
+    NSInteger days = (NSInteger)deltaTime / (24 * 60 * 60);
+    //NSInteger hours = ((NSInteger)deltaTime - days * 24 * 60 * 60) / (60 * 60);
+    //NSInteger minute = ((NSInteger)deltaTime - days * 24 * 60 * 60 - hours * 60 * 60) / 60;
+    //NSInteger second = (NSInteger)deltaTime - days * 24 * 60 * 60 - hours * 60 * 60 - minute * 60;
+    
+    return days;
+}
+
+#pragma mark - 返回 指定时间加指定天数 结果日期字符串
++ (NSString *)date:(NSString *)dateString formatter:(NSString *)formatterStr addDays:(NSInteger)days {
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc]init];
+    dateFormatter.dateFormat = formatterStr; //yyyy-MM-dd
+    NSDate *myDate = [dateFormatter dateFromString:dateString];
+    NSDate *newDate = [myDate dateByAddingTimeInterval:60 * 60 * 24 * days];
+    //NSDate *newDate = [NSDate dateWithTimeInterval:60 * 60 * 24 * days sinceDate:myDate];
+    NSString *newDateString = [dateFormatter stringFromDate:newDate];
+    NSLog(@"%@", newDateString);
+    return newDateString;
 }
 
 #pragma mark - 返回日期格式字符串  @"2016-10-16 14:30:30"  @"yyyy-MM-dd HH:mm:ss"
@@ -83,5 +116,6 @@
     }
     return nil;
 }
+
 
 @end

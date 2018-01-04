@@ -8,13 +8,15 @@
 
 #import <Foundation/Foundation.h>
 
-@interface NSData (BRAdd)
+@interface NSDate (BRAdd)
 
 /** 获取系统当前的时间戳，即当前时间距1970的秒数（以毫秒为单位） */
 + (NSString *)currentTimestamp;
 
+
 /** 获取当前的时间 */
 + (NSString *)currentDateString;
+
 
 /**
  *  按指定格式获取当前的时间
@@ -23,6 +25,15 @@
  */
 + (NSString *)currentDateStringWithFormat:(NSString *)formatterStr;
 
+
+/**
+ *  计算两个日期之间的天数
+ *
+ *  @param  beginDateString     设置格式：yyyy-MM-dd
+ *  @param  endDateString       设置格式：yyyy-MM-dd
+ */
++ (NSInteger)deltaDaysFrombeginDate:(NSString *)beginDateString endDate:(NSString *)endDateString;
+
 /**
  *  返回指定时间差值的日期字符串
  *
@@ -30,6 +41,17 @@
  *  @return 日期字符串，格式：yyyy-MM-dd HH:mm:ss
  */
 + (NSString *)dateStringWithDelta:(NSTimeInterval)delta;
+
+
+/**
+ *  指定时间加指定天数
+ *
+ *  @param dateString  日期
+ *  @param days        天数
+ *  @return 日期字符串，格式：yyyy-MM-dd
+ */
++ (NSString *)date:(NSString *)dateString formatter:(NSString *)formatterStr addDays:(NSInteger)days;
+
 
 /**
  *  返回日期格式字符串
